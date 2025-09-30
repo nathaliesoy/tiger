@@ -1,2 +1,2 @@
-# tiger
-Transformer-based hierarchical GNN for particle decay reconstruction
+# TIGER
+Topology-Independent Graph-based Event Reconstruction for particle decays. 
