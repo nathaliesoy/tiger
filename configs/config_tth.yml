@@ -1,0 +1,102 @@
+name: spanet_tth-ttbb
+dataset: spanet
+num_epochs: 1000
+check_val_every_n_epoch: 1
+n_events_train: 15035222
+n_events_val: 791328
+n_events_test: 388525
+batch_size: 2000
+val_index_start: 15035222
+
+train_data_path: /path/to/train.h5
+val_data_path: /path/to/val.h5
+test_data_path: /path/to/test.h5
+
+load_ckpt: null
+
+binary_class: false
+use_edge_features: true
+
+aux_task: true
+aux_task_scale: 50
+aux_task_fin: false
+aux_task_fin_scale: 50
+
+sb_class: true
+
+use_sampler: true
+
+dropout: null
+
+tth_data: true
+split_input_classes: true
+
+freeze_stage2: false
+stage2_unfreeze_epoch: 10
+
+
+stage1_only: false
+balance_epoch: 40
+# for sigmoid balancing 
+balance_slope: 10 
+balance_offset: 6
+
+n_workers: 4
+
+lr: 0.001
+T_max: 1500
+
+hid_dim: 64
+
+top_k: 5
+edge_prob_threshold: 0.2
+
+
+encoder:
+  input_dim: 7
+  init_hidden_dim: [200, 100]
+  mpnn_blocks: 4
+  mpnn_or_transformer: transformer
+  transformer:
+    n_trf: 12
+    mha_config:
+      num_heads: 4
+    dense_config:
+      hidden_layers: [64]
+      activation: LeakyReLU
+      norm_layer: LayerNorm
+
+edge_net1_hid_dim: [200,200]
+edge_net2_hid_dim: [200,200]
+edge_class1_hid_dim: [100,50]
+edge_class2_hid_dim: [100,50]
+node_proj_hid_dim: [150]
+
+aux_net_hid_dim: [150, 50]
+# aux_net_hid_dim: [200, 100]
+aux_classes: 9
+
+aux_net_hid_dim_fin: [150, 50]
+aux_classes_fin: 6
+
+sb_class_net_hid_dim: [150, 50]
+
+stage2_transformer:
+  n_trf: 3
+  mha_config:
+    num_heads: 4
+  dense_config:
+    hidden_layers: [64] #[128, 64]
+    activation: LeakyReLU
+    norm_layer: LayerNorm
+
+n_max: 20
+n_min: 8
+
+possible_pdgids: [0,1]
+lep_pdgids: [11, 13]  # e, mu
+
+transform:
+  pt:
+    mean: 4.127
+    sigma: 0.508
